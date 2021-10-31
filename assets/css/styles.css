@@ -4587,6 +4587,7 @@ ul.cources_facts_list li:after {
     display: flex;
     align-items: center;
     width: 100%;
+    margin:10px 0;
 }
 .education_block_list_layout .course_ratting {
     margin-right: 12px;
@@ -6873,7 +6874,7 @@ span.mod-close {
     position: relative;
     margin-bottom: 1.5rem;
     display: flex;
-    justify-content: end;
+    justify-content: start;
     align-items: center;
 }
 .cn-info-icon {
@@ -8197,7 +8198,7 @@ span.payment_status.cancel {
 }
 .d-navigation ul li.active>a {
     color: #ffffff !important;
-    background: #da0b4e; 
+    background: #54b963; 
 }
 .d-navigation ul li a i{
 	margin-right:10px;
@@ -9313,6 +9314,16 @@ footer.skin-dark-footer .footer-widget ul li a, footer.skin-dark-footer, footer.
     color: #fff!important;
 }
 
+.articles_grid_thumb img{
+    height: 250px;
+}
 
+.breadcrumb-item.active{
+    color:green;
+}
+
+.edu_wraper h6{
+    margin-top: 20px;
+}
 
 

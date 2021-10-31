@@ -9,7 +9,7 @@
 						<div class="col-lg-12 col-md-12">
 							
 							<div class="breadcrumbs-wrap">
-								<h1 class="breadcrumb-title">Het in Touch</h1>
+								<h1 class="breadcrumb-title">Contact Us</h1>
 								<nav aria-label="breadcrumb">
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -87,7 +87,7 @@
 								<div class="prc_wrap-body">
 									<div class="contact-info">
 								
-										<h2>Get In Touch</h2>
+										<h2>Contact Us</h2>
 										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do </p>
 										
 										<div class="cn-info-detail">
@@ -96,7 +96,7 @@
 											</div>
 											<div class="cn-info-content">
 												<h4 class="cn-info-title">Reach Us</h4>
-												2512, New Market,<br>Eliza Road, Sincher 80 CA,<br>Canada, USA
+												# DeFactor- 4/1 Chowdurypara,<br> DIT Road, Malibagh,<br>Dhaka 1219
 											</div>
 										</div>
 										
@@ -106,7 +106,7 @@
 											</div>
 											<div class="cn-info-content">
 												<h4 class="cn-info-title">Drop A Mail</h4>
-												support@Rikada.com<br>Rikada@gmail.com
+												support@gmail.com<br>farid@gmail.com
 											</div>
 										</div>
 										
@@ -116,7 +116,7 @@
 											</div>
 											<div class="cn-info-content">
 												<h4 class="cn-info-title">Call Us</h4>
-												(41) 123 521 458<br>+91 235 548 7548
+												(88) 01739692387<br>01739692387
 											</div>
 										</div>
 										

@@ -15,7 +15,7 @@
 
         $stuemail  		 = escape($_POST['stuemail']);
 
-        $sql = "SELECT stu_email FROM student_reg WHERE stu_email = '".$stuemail."'";
+        $sql = "SELECT email FROM users WHERE email = '".$stuemail."'";
         $result = $conn->query($sql);
 
         $row = $result->num_rows;
@@ -29,12 +29,13 @@
         $stuname     	 = escape($_POST['stuname']); 
         $stuemail  		 = escape($_POST['stuemail']);
         $stupass         = escape($_POST['stupass']);
+        $hashpass        = hash('sha256',$stupass);
         $stuusername     = escape($_POST['stuusername']);
 
         $added = time();
-        $data 		= array('stu_name' => $stuname, 'stu_email' => $stuemail,'stu_username' => $stuusername,'stu_pass' => $stupass,'stu_occ' => '','stu_img' => '');
+        $data 		= array('name' => $stuname, 'email' => $stuemail,'username' => $stuusername,'password' => $hashpass,'date_added' => $added,'role_id' => '2','status' => '1' );
 
-        $query = $database->insertdata('student_reg',$data);
+        $query = $database->insertdata('users',$data);
         if($query){
             echo json_encode("ok");
         }
@@ -53,8 +54,9 @@
 
             $user_email     	 = escape($_POST['user_email']); 
             $user_pass  		 = escape($_POST['user_pass']);
+            $hashpass            = hash('sha256',$user_pass);
     
-            $sql = "SELECT stu_email,stu_pass FROM student_reg WHERE stu_email = '$user_email' AND stu_pass = '$user_pass'";
+            $sql = "SELECT email,password FROM users WHERE email = '$user_email' AND password = '$hashpass'";
             $result = $conn->query($sql);
     
             $row = $result->num_rows;

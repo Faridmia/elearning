@@ -335,6 +335,22 @@
 													<textarea class="form-control ht-140" placeholder="Review"></textarea>
 												</div>
 											</div>
+											<div class="col-lg-12 col-md-12 col-sm-12">
+												<div class="form-group">
+													<b>Rating: </b>
+													<select name="rating" id="">
+														<option value="">--Select--</option>
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+														<option value="5">5</option>
+													</select>
+													<br/>
+													<br/>
+													<input type="hidden" name="p_id" value="<?php // echo $p_id; ?>">
+												</div>
+											</div>
 											
 											<div class="col-lg-12 col-md-12 col-sm-12">
 												<div class="form-group">

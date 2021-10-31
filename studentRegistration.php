@@ -27,7 +27,7 @@
 
                         <div class="form-group">
                             <span id="statusMsg4"></span>
-                            <input type="password" name="stupass" id="stupass" class="form-control password">
+                            <input type="password" name="stupass" id="stupass" class="form-control password" placeholder="Password">
                         </div>
                         <div class="form-group">
                             <input type="hidden" name="page" value="stureg" />

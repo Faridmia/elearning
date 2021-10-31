@@ -31,6 +31,36 @@
 			<!-- ============================ Find Courses with Sidebar ================================== -->
 			<section class="pt-0">
 				<div class="container">
+
+				<?php 
+					$sql = "SELECT course_id,course_title,course_original_price,is_free_course,course_overview_provider,course_tag,video_url,course_desc,outcomes,course_desc,course_duration,course_sell_price,course_img,long_desc,level,is_top_course,requirement,course_features,category_id,sub_category_id,is_active FROM courses LEFT JOIN categories ON courses.category_id = categories.cat_id LEFT JOIN sub_categories ON courses.sub_category_id = sub_categories.cat_id ORDER BY courses.course_id  DESC";
+                        $query = mysqli_query($conn,$sql);
+					//	$query       = $database->getData("courses ",$data);
+
+					$fetch_data = mysqli_fetch_array($query);
+
+					$category_id = $fetch_data['category_id'];
+
+					//$cat_tab_sql = "SELECT * FROM categories";
+					$cat_tab_sql = $sql = "SELECT DISTINCT(cat_name),cat_id FROM categories LEFT JOIN courses ON categories.cat_id = courses.category_id  ORDER BY categories.cat_id  DESC";
+
+					$cat_query = mysqli_query($conn,$cat_tab_sql);
+
+				   $fetch_cat = mysqli_fetch_array($cat_query);
+
+				   
+
+				  
+
+
+					
+						
+					// echo "<pre>";
+					// print_r($fetch_cat);
+					// echo "</pre>";
+
+					
+				?>
 					
 					<!-- Onclick Sidebar -->
 					<div class="row">
@@ -53,30 +83,14 @@
 										
 										<h4 class="side_title">Course categories</h4>
 										<ul class="no-ul-list mb-3">
+										
+
 											<li>
 												<input id="a-4" class="checkbox-custom" name="a-4" type="checkbox">
-												<label for="a-4" class="checkbox-custom-label">Backend (3)</label>
+												<label for="a-4" class="checkbox-custom-label"></label>
 											</li>
-											<li>
-												<input id="a-5" class="checkbox-custom" name="a-5" type="checkbox">
-												<label for="a-5" class="checkbox-custom-label">Frontend (2)</label>
-											</li>
-											<li>
-												<input id="a-6" class="checkbox-custom" name="a-6" type="checkbox">
-												<label for="a-6" class="checkbox-custom-label">General (2)</label>
-											</li>
-											<li>
-												<input id="a-7" class="checkbox-custom" name="a-7" type="checkbox">
-												<label for="a-7" class="checkbox-custom-label">IT & Software (2)</label>
-											</li>
-											<li>
-												<input id="a-8" class="checkbox-custom" name="a-8" type="checkbox">
-												<label for="a-8" class="checkbox-custom-label">Photography (2)</label>
-											</li>
-											<li>
-												<input id="a-9" class="checkbox-custom" name="a-9" type="checkbox">
-												<label for="a-9" class="checkbox-custom-label">Technology (2)</label>
-											</li>
+											
+										
 										</ul>
 										
 										<h4 class="side_title">Instructors</h4>
@@ -129,30 +143,15 @@
 								
 								<h4 class="side_title">Course categories</h4>
 								<ul class="no-ul-list mb-3">
+								<?php 
+									$i = 4;
+									while ($row = mysqli_fetch_array($cat_query) ) { ?>
 									<li>
-										<input id="aa-4" class="checkbox-custom" name="aa-4" type="checkbox">
-										<label for="aa-4" class="checkbox-custom-label">Backend (3)</label>
-									</li>
-									<li>
-										<input id="aa-5" class="checkbox-custom" name="aa-5" type="checkbox">
-										<label for="aa-5" class="checkbox-custom-label">Frontend (2)</label>
-									</li>
-									<li>
-										<input id="aa-6" class="checkbox-custom" name="aa-6" type="checkbox">
-										<label for="aa-6" class="checkbox-custom-label">General (2)</label>
-									</li>
-									<li>
-										<input id="aa-7" class="checkbox-custom" name="aa-7" type="checkbox">
-										<label for="aa-7" class="checkbox-custom-label">IT & Software (2)</label>
-									</li>
-									<li>
-										<input id="aa-8" class="checkbox-custom" name="aa-8" type="checkbox">
-										<label for="aa-8" class="checkbox-custom-label">Photography (2)</label>
-									</li>
-									<li>
-										<input id="aa-9" class="checkbox-custom" name="aa-9" type="checkbox">
-										<label for="aa-9" class="checkbox-custom-label">Technology (2)</label>
-									</li>
+										<input id="aa-<?php echo $i;?>" class="checkbox-custom category" name="category" value="<?php echo $row['cat_id'];?>" type="checkbox">
+										<label for="aa-<?php echo $i;?>" class="checkbox-custom-label"><?php echo $row['cat_name'];?></label>
+									</li>	
+								<?php	$i++;}?>
+									
 								</ul>
 								
 								<h4 class="side_title">Instructors</h4>
@@ -187,335 +186,10 @@
 						</div>	
 						
 						<div class="col-lg-8 col-md-12 col-sm-12 order-1 order-lg-2 order-md-1">
-							
-							<!-- Row -->
-							<div class="row align-items-center mb-3">
-								<div class="col-lg-6 col-md-6 col-sm-12">
-									We found <strong>142</strong> courses for you
-								</div>
-								<div class="col-lg-6 col-md-6 col-sm-12 ordering">
-									<div class="filter_wraps">
-										<div class="dn db-991 mt30 mb0 show-23">
-											<div id="main2">
-												<a href="javascript:void(0)" class="btn btn-theme arrow-btn filter_open" onclick="openNav()" id="open2">Show Filter<span><i class="fas fa-arrow-alt-circle-right"></i></span></a>
-											</div>
-										</div>
-										<div class="dropdown show">
-											<a class="btn btn-custom dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											Recent Courses
-											</a>
-											<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-											<a class="dropdown-item" href="#">Popular Courses</a>
-											<a class="dropdown-item" href="#">Recent Courses</a>
-											<a class="dropdown-item" href="#">Featured Courses</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- /Row -->
-							
-							<div class="row">
+							<div class="row filter_data">
 						
-								<!-- Cource Grid 1 -->
-								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-									<div class="education_block_list_layout">
-										
-										<div class="education_block_thumb n-shadow">
-											<a href="course-detail.html"><img src="assets/img/co-2.jpg" class="img-fluid" alt=""></a>
-										</div>
-										
-										<div class="list_layout_ecucation_caption">
-										
-											<div class="education_block_body">
-												<h4 class="bl-title"><a href="course-detail.html">Learn Full Photoshop Course CS6</a></h4>
-												<div class="course_rate_system">
-													<div class="course_ratting">
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star"></i>
-													</div>
-													<div class="course_reviews_info">
-														<strong class="high">4.7</strong>(2,420 Reviews)
-													</div>											
-												</div>
-												<div class="cources_price">$520<div class="less_offer">$720</div></div>
-											</div>
-
-											<div class="education_block_footer mt-3">
-												<div class="education_block_author">
-													<div class="path-img"><a href="instructor-detail.html"><img src="assets/img/user-1.jpg" class="img-fluid" alt=""></a></div>
-													<h5><a href="instructor-detail.html">Robert Wilson</a></h5>
-												</div>
-												<div class="cources_info_style3">
-													<ul>
-														<li><div class="foot_lecture"><i class="ti-control-skip-forward mr-2"></i>54 lectures</div></li>
-													</ul>
-												</div>
-											</div>
-										
-										</div>
-										
-									</div>	
-								</div>
-								
-								<!-- Cource Grid 1 -->
-								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-									<div class="education_block_list_layout">
-										
-										<div class="education_block_thumb n-shadow">
-											<a href="course-detail.html"><img src="assets/img/co-3.jpg" class="img-fluid" alt=""></a>
-										</div>
-										
-										<div class="list_layout_ecucation_caption">
-										
-											<div class="education_block_body">
-												<h4 class="bl-title"><a href="course-detail.html">Full Web Designing Course</a></h4>
-												<div class="course_rate_system">
-													<div class="course_ratting">
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star"></i>
-													</div>
-													<div class="course_reviews_info">
-														<strong class="mid">4.8</strong>(2,300 Reviews)
-													</div>											
-												</div>
-												<div class="cources_price">$220<div class="less_offer">$499</div></div>
-											</div>
-
-											<div class="education_block_footer mt-3">
-												<div class="education_block_author">
-													<div class="path-img"><a href="instructor-detail.html"><img src="assets/img/user-2.jpg" class="img-fluid" alt=""></a></div>
-													<h5><a href="instructor-detail.html">Ritha Robert</a></h5>
-												</div>
-												<div class="cources_info_style3">
-													<ul>
-														<li><div class="foot_lecture"><i class="ti-control-skip-forward mr-2"></i>14 lectures</div></li>
-													</ul>
-												</div>
-											</div>
-										
-										</div>
-										
-									</div>	
-								</div>
-								
-								<!-- Cource Grid 1 -->
-								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-									<div class="education_block_list_layout">
-										
-										<div class="education_block_thumb n-shadow">
-											<a href="course-detail.html"><img src="assets/img/co-4.jpg" class="img-fluid" alt=""></a>
-										</div>
-										
-										<div class="list_layout_ecucation_caption">
-										
-											<div class="education_block_body">
-												<h4 class="bl-title"><a href="course-detail.html">Adobe Dreamwear Flash Coded</a></h4>
-												<div class="course_rate_system">
-													<div class="course_ratting">
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star"></i>
-													</div>
-													<div class="course_reviews_info">
-														<strong class="good">4.2</strong>(810 Reviews)
-													</div>											
-												</div>
-												<div class="cources_price">$400<div class="less_offer">$500</div></div>
-											</div>
-
-											<div class="education_block_footer mt-3">
-												<div class="education_block_author">
-													<div class="path-img"><a href="instructor-detail.html"><img src="assets/img/user-3.jpg" class="img-fluid" alt=""></a></div>
-													<h5><a href="instructor-detail.html">Adam Robert</a></h5>
-												</div>
-												<div class="cources_info_style3">
-													<ul>
-														<li><div class="foot_lecture"><i class="ti-control-skip-forward mr-2"></i>25 lectures</div></li>
-													</ul>
-												</div>
-											</div>
-										
-										</div>
-										
-									</div>	
-								</div>
-								
-								<!-- Cource Grid 1 -->
-								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-									<div class="education_block_list_layout">
-										
-										<div class="education_block_thumb n-shadow">
-											<a href="course-detail.html"><img src="assets/img/co-5.jpg" class="img-fluid" alt=""></a>
-										</div>
-										
-										<div class="list_layout_ecucation_caption">
-										
-											<div class="education_block_body">
-												<h4 class="bl-title"><a href="course-detail.html">Learn Full Photoshop Course CS6</a></h4>
-												<div class="course_rate_system">
-													<div class="course_ratting">
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star"></i>
-													</div>
-													<div class="course_reviews_info">
-														<strong class="mid">4.3</strong>(3,122 Reviews)
-													</div>											
-												</div>
-												<div class="cources_price">$599<div class="less_offer">$299</div></div>
-											</div>
-
-											<div class="education_block_footer mt-3">
-												<div class="education_block_author">
-													<div class="path-img"><a href="instructor-detail.html"><img src="assets/img/user-4.jpg" class="img-fluid" alt=""></a></div>
-													<h5><a href="instructor-detail.html">Shilpa Singh</a></h5>
-												</div>
-												<div class="cources_info_style3">
-													<ul>
-														<li><div class="foot_lecture"><i class="ti-control-skip-forward mr-2"></i>54 lectures</div></li>
-													</ul>
-												</div>
-											</div>
-										
-										</div>
-										
-									</div>	
-								</div>
-								
-								<!-- Cource Grid 1 -->
-								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-									<div class="education_block_list_layout">
-										
-										<div class="education_block_thumb n-shadow">
-											<a href="course-detail.html"><img src="assets/img/co-6.jpg" class="img-fluid" alt=""></a>
-										</div>
-										
-										<div class="list_layout_ecucation_caption">
-										
-											<div class="education_block_body">
-												<h4 class="bl-title"><a href="course-detail.html">Business Analysis Full Courses</a></h4>
-												<div class="course_rate_system">
-													<div class="course_ratting">
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star"></i>
-													</div>
-													<div class="course_reviews_info">
-														<strong class="good">4.5</strong>(2,540 Reviews)
-													</div>											
-												</div>
-												<div class="cources_price">$399<div class="less_offer">$699</div></div>
-											</div>
-
-											<div class="education_block_footer mt-3">
-												<div class="education_block_author">
-													<div class="path-img"><a href="instructor-detail.html"><img src="assets/img/user-5.jpg" class="img-fluid" alt=""></a></div>
-													<h5><a href="instructor-detail.html">Adam Wilson</a></h5>
-												</div>
-												<div class="cources_info_style3">
-													<ul>
-														<li><div class="foot_lecture"><i class="ti-control-skip-forward mr-2"></i>70 lectures</div></li>
-													</ul>
-												</div>
-											</div>
-										
-										</div>
-										
-									</div>	
-								</div>
-								
-								<!-- Cource Grid 1 -->
-								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-									<div class="education_block_list_layout">
-										
-										<div class="education_block_thumb n-shadow">
-											<a href="course-detail.html"><img src="assets/img/co-7.jpg" class="img-fluid" alt=""></a>
-										</div>
-										
-										<div class="list_layout_ecucation_caption">
-										
-											<div class="education_block_body">
-												<h4 class="bl-title"><a href="course-detail.html">Learn To Create WP Theme</a></h4>
-												<div class="course_rate_system">
-													<div class="course_ratting">
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star filled"></i>
-														<i class="fa fa-star"></i>
-													</div>
-													<div class="course_reviews_info">
-														<strong class="mid">4.7</strong>(3,750 Reviews)
-													</div>											
-												</div>
-												<div class="cources_price">$700<div class="less_offer">$1099</div></div>
-											</div>
-
-											<div class="education_block_footer mt-3">
-												<div class="education_block_author">
-													<div class="path-img"><a href="instructor-detail.html"><img src="assets/img/user-6.jpg" class="img-fluid" alt=""></a></div>
-													<h5><a href="instructor-detail.html">Priya Singh</a></h5>
-												</div>
-												<div class="cources_info_style3">
-													<ul>
-														<li><div class="foot_lecture"><i class="ti-control-skip-forward mr-2"></i>26 lectures</div></li>
-													</ul>
-												</div>
-											</div>
-										
-										</div>
-										
-									</div>	
-								</div>
 								
 							</div>
-							
-							<!-- Row -->
-							<div class="row">
-								<div class="col-lg-12 col-md-12 col-sm-12">
-									
-									<!-- Pagination -->
-									<div class="row">
-										<div class="col-lg-12 col-md-12 col-sm-12">
-											<ul class="pagination p-center">
-												<li class="page-item">
-												  <a class="page-link" href="#" aria-label="Previous">
-													<span class="ti-arrow-left"></span>
-													<span class="sr-only">Previous</span>
-												  </a>
-												</li>
-												<li class="page-item"><a class="page-link" href="#">1</a></li>
-												<li class="page-item"><a class="page-link" href="#">2</a></li>
-												<li class="page-item active"><a class="page-link" href="#">3</a></li>
-												<li class="page-item"><a class="page-link" href="#">...</a></li>
-												<li class="page-item"><a class="page-link" href="#">18</a></li>
-												<li class="page-item">
-												  <a class="page-link" href="#" aria-label="Next">
-													<span class="ti-arrow-right"></span>
-													<span class="sr-only">Next</span>
-												  </a>
-												</li>
-											</ul>
-										</div>
-									</div>
-									
-								</div>
-							</div>
-							<!-- /Row -->
-							
 						</div>
 					
 					</div>
@@ -543,4 +217,12 @@
 				</div>
 			</section>
 			<!-- ================================= End Newsletter =============================== -->
+		<style>
+			#loading{
+				text-align:center;
+				background:url('loader.gif') no-repeat center;
+				height: 150px;
+			}
+		</style>
+
 <?php require_once("maininclude/footer.php"); ?>

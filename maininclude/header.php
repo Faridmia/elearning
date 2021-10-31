@@ -65,6 +65,23 @@ require_once('admin/functions.php');?>
 			margin-top: 15px;
 		}
 
+		.menu-img-placeholder img {
+			height: 45px;
+			width: 45px;
+			text-align: center;
+			line-height: 45px;
+			display: inline-block;
+			border-radius: 50%;
+			color: #686f7a;
+			border: 1px solid transparent;
+			margin:-10px 0;
+			font-size: 18px;
+		}
+
+		.profile-submenu-indicator > a .submenu-indicator{
+			display: none;
+		}
+
 
 	</style>
 		
@@ -106,7 +123,7 @@ require_once('admin/functions.php');?>
 									<ul class="nav-dropdown nav-submenu">
 										<li><a href="list-with-sidebar.php">List Layout with Sidebar</a></li>
 										<li><a href="full-width-course.php">Courses grid</a></li>
-										<li><a href="find-instructor.php">Find Instructor</a></li>
+										<li><a href="detail.php">Courses Details</a></li>
 										<li><a href="instructor-detail.php">Instructor Detail</a></li>
 									</ul>
 								</li>
@@ -123,27 +140,55 @@ require_once('admin/functions.php');?>
 								<li><a href="contact.php">Contact</a></li>
 								
 							</ul>
-							
-							<ul class="nav-menu nav-menu-social align-to-right">
-								<?php 
-									if(isset($_SESSION['is_login'])){ 
-										echo '<li>
-											<a href="#">My Profile</a>
+							<?php 
+								if(isset($_SESSION['is_login'])){ 
+									$user_login = $_SESSION['user_email']; 
+									$query = "SELECT * FROM users WHERE email = '$user_login'";
+									$result = $conn->query($query);
+									$row         = mysqli_fetch_array($result);
+									$profile_photo       = $row['user_profile_photo'];
+									
+									?>
+							<ul class="nav-menu align-to-right ">
+								<li><a href="admin/instructor.php">Instructor</a></li>
+								<li class="profile-submenu-indicator">
+									<a href="javascript::" class="menu-img-placeholder">
+									<?php if(!empty($profile_photo)) : ?>
+									<img src="assets/img/profile/<?php echo $profile_photo;?>" class="img-fluid avater" alt="">
+									<?php else : ?>
+									   <img src="assets/img/placeholder.png" class="img-fluid avater" alt="">
+									<?php endif;?>
+											</a>
+									<ul class="nav-dropdown nav-submenu" style="right: auto; display: none;">
+										<li class=""><a href="#">User Dashboard<span class="submenu-indicator"></span><span class="submenu-indicator"></span></a>
+											
+											<?php 
+													echo '<li>
+														<a href="users-settings.php">User Profile</a>
+													</li>
+													<li>
+														<a href="logout.php">Logout</a>
+													</li>';
+												
+											?>
+											
 										</li>
-										<li>
-											<a href="logout.php">Logout</a>
-										</li>';
-									 } else{
-										 echo '<li class="login_click light">
-										 <a href="#" data-toggle="modal" data-target="#login">Sign in</a>
-									 </li>
-									 <li class="login_click theme-bg">
-										 <a href="#" data-toggle="modal" data-target="#signup">Sign up</a>
-									 </li>';
-
-									 }
+									</ul>
+								</li>
+							</ul>
+							<?php } else { ?>
+							<ul class="nav-menu nav-menu-social align-to-right">
+								
+								<?php 
+									echo '<li class="login_click light">
+									<a href="#" data-toggle="modal" data-target="#login">Sign in</a>
+								</li>
+								<li class="login_click theme-bg">
+									<a href="#" data-toggle="modal" data-target="#signup">Sign up</a>
+								</li>';
 								?>
 							</ul>
+							<?php } ?>
 						</div>
 					</nav>
 				</div>

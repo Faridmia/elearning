@@ -35,20 +35,34 @@
 					<div class="row">	
 						<div class="col-lg-12 col-md-12 col-sm-12">
 							<div class="row">
-						
+
+							<?php
+
+							 	$data        = array('course_img','course_sell_price','course_title','course_id','course_desc','course_duration');
+							    $query       = $database->getData("courses",$data);
+							    $row         = mysqli_fetch_array($query);
+							    while($row = mysqli_fetch_array($query)){
+
+							    	$course_id       = (int) $row['course_id'];
+							    	$course_title    = $row['course_title'];
+							    	$course_desc     = $row['course_desc'];
+							    	$course_duration = $row['course_duration'];    
+							    	$course_img      = $row['course_img'];    
+							    	$course_sell_price      = $row['course_sell_price'];    
+
+								?>
 								<!-- Cource Grid 1 -->
 								<div class="col-lg-4 col-md-6">
 									<div class="education_block_grid">
 										
 										<div class="education_block_thumb">
-											<a href="course-detail.html"><img src="assets/img/course-1.jpg" class="img-fluid" alt=""></a>
-											<div class="cources_price">$510</div>
-											<div class="education_ratting"><i class="fa fa-star"></i>4.8 (62)</div>
+											<a href='detail.php?courseid=<?php echo $course_id;?>'><img src='assets/img/course/<?php echo $course_img;?>' class='img-fluid' alt=''></a>
+											<div class="cources_price">$<?php echo $course_sell_price;?></div>
 										</div>
 										
 										<div class="education_block_body">
-											<h4 class="bl-title"><a href="course-detail.html">Tableau for Beginners: Get CA Certified, Grow Your Career</a></h4>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore. </p>
+											<h4 class="bl-title"><a href="detail.php?courseid=<?php echo $course_id;?>"><?php echo $course_title;?></a></h4>
+											<p><?php echo $course_desc;?></p>
 										</div>
 										
 										<div class="education_block_footer">
@@ -56,158 +70,15 @@
 												<div class="path-img"><a href="instructor-detail.html"><img src="assets/img/user-1.jpg" class="img-fluid" alt=""></a></div>
 												<h5><a href="instructor-detail.html">Daksh Preet</a></h5>
 											</div>
-											<span class="education_block_time"><i class="ti-time mr-1"></i>4h 30min</span>
+											<span class="education_block_time"><i class="ti-time mr-1"></i><?php echo $course_duration;?></span>
 										</div>
 										
 									</div>	
 								</div>
-								
-								<!-- Cource Grid 1 -->
-								<div class="col-lg-4 col-md-6">
-									<div class="education_block_grid">
-										
-										<div class="education_block_thumb">
-											<a href="course-detail.html"><img src="assets/img/course-2.jpg" class="img-fluid" alt=""></a>
-											<div class="cources_price">$620</div>
-											<div class="education_ratting"><i class="fa fa-star"></i>4.7 (40)</div>
-										</div>
-										
-										<div class="education_block_body">
-											<h4 class="bl-title"><a href="course-detail.html">The Complete Business Plan Course (Includes 50 Templates)</a></h4>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore. </p>
-										</div>
-										
-										<div class="education_block_footer">
-											<div class="education_block_author">
-												<div class="path-img"><a href="instructor-detail.html"><img src="assets/img/user-2.jpg" class="img-fluid" alt=""></a></div>
-												<h5><a href="instructor-detail.html">Anoop Ojha</a></h5>
-											</div>
-											<span class="education_block_time"><i class="ti-time mr-1"></i>3h 40min</span>
-										</div>
-										
-									</div>	
-								</div>
-								
-								<!-- Cource Grid 1 -->
-								<div class="col-lg-4 col-md-6">
-									<div class="education_block_grid">
-										
-										<div class="education_block_thumb">
-											<a href="course-detail.html"><img src="assets/img/course-3.jpg" class="img-fluid" alt=""></a>
-											<div class="cources_price">$620</div>
-											<div class="education_ratting"><i class="fa fa-star"></i>4.5 (50)</div>
-										</div>
-										
-										<div class="education_block_body">
-											<h4 class="bl-title"><a href="course-detail.html">An Entire MBA in 1 Course:Award Winning Business School Prof</a></h4>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore. </p>
-										</div>
-										
-										<div class="education_block_footer">
-											<div class="education_block_author">
-												<div class="path-img"><a href="instructor-detail.html"><img src="assets/img/user-3.jpg" class="img-fluid" alt=""></a></div>
-												<h5><a href="instructor-detail.html">Dhananjay Preet</a></h5>
-											</div>
-											<span class="education_block_time"><i class="ti-time mr-1"></i>5h 50min</span>
-										</div>
-										
-									</div>	
-								</div>
-								
-								<!-- Cource Grid 1 -->
-								<div class="col-lg-4 col-md-6">
-									<div class="education_block_grid">
-										
-										<div class="education_block_thumb">
-											<a href="course-detail.html"><img src="assets/img/course-4.jpg" class="img-fluid" alt=""></a>
-											<div class="cources_price">199</div>
-											<div class="education_ratting"><i class="fa fa-star"></i>4.6 (69)</div>
-										</div>
-										
-										<div class="education_block_body">
-											<h4 class="bl-title"><a href="course-detail.html">The Complete Financial Analyst Course 2020</a></h4>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore. </p>
-										</div>
-										
-										<div class="education_block_footer">
-											<div class="education_block_author">
-												<div class="path-img"><a href="instructor-detail.html"><img src="assets/img/user-4.jpg" class="img-fluid" alt=""></a></div>
-												<h5><a href="instructor-detail.html">Litha Roy</a></h5>
-											</div>
-											<span class="education_block_time"><i class="ti-time mr-1"></i>2h 30min</span>
-										</div>
-										
-									</div>	
-								</div>
-								
-								<!-- Cource Grid 1 -->
-								<div class="col-lg-4 col-md-6">
-									<div class="education_block_grid">
-										
-										<div class="education_block_thumb">
-											<a href="course-detail.html"><img src="assets/img/course-5.jpg" class="img-fluid" alt=""></a>
-											<div class="cources_price">$429</div>
-											<div class="education_ratting"><i class="fa fa-star"></i>4.8 (28)</div>
-										</div>
-										
-										<div class="education_block_body">
-											<h4 class="bl-title"><a href="course-detail.html">PMP Exam Prep Seminar - PMBOK Guide 6</a></h4>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore. </p>
-										</div>
-										
-										<div class="education_block_footer">
-											<div class="education_block_author">
-												<div class="path-img"><a href="instructor-detail.html"><img src="assets/img/user-5.jpg" class="img-fluid" alt=""></a></div>
-												<h5><a href="instructor-detail.html">Shaurya Preet</a></h5>
-											</div>
-											<span class="education_block_time"><i class="ti-time mr-1"></i>5h 45min</span>
-										</div>
-										
-									</div>	
-								</div>
-								
-								<!-- Cource Grid 1 -->
-								<div class="col-lg-4 col-md-6">
-									<div class="education_block_grid">
-										
-										<div class="education_block_thumb">
-											<a href="course-detail.html"><img src="assets/img/course-6.jpg" class="img-fluid" alt=""></a>
-											<div class="cources_price">$320</div>
-											<div class="education_ratting"><i class="fa fa-star"></i>4.7 (40)</div>
-										</div>
-										
-										<div class="education_block_body">
-											<h4 class="bl-title"><a href="course-detail.html">Tableau 2020 A-Z:Hands-On Tableau Training For Data Science!</a></h4>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore. </p>
-										</div>
-										
-										<div class="education_block_footer">
-											<div class="education_block_author">
-												<div class="path-img"><a href="instructor-detail.html"><img src="assets/img/user-6.jpg" class="img-fluid" alt=""></a></div>
-												<h5><a href="instructor-detail.html">Shilpa Shekh</a></h5>
-											</div>
-											<span class="education_block_time"><i class="ti-time mr-1"></i>4h 30min</span>
-										</div>
-										
-									</div>	
-								</div>
+
+							<?php } ?>
 								
 							</div>
-					
-							<!-- Row -->
-							<div class="row">
-								<div class="col-lg-12 col-md-12 col-sm-12">
-									
-									<!-- Pagination -->
-									<div class="row">
-										<div class="col-lg-12 col-md-12 col-sm-12 text-center">
-											<button type="button" class="btn btn-loader">Load More<i class="ti-reload ml-3"></i></button>
-										</div>
-									</div>
-									
-								</div>
-							</div>
-							<!-- /Row -->
 							
 						</div>
 					

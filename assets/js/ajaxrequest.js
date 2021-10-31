@@ -21,7 +21,7 @@ $(document).ready(function(){
               // console.log(result);
 
                if( result != 0){
-                    $("#statusMsg2").html("<span style='color:red;'>Available</span>");
+                    $("#statusMsg2").html("<span style='color:red;'>Email already exist!</span>");
                    $("#signupbtn").attr("disabled",true);
                }
                if(result == 0 && reg.test(stuemail)){

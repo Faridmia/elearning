@@ -9304,6 +9304,18 @@ footer.dark-footer.skin-dark-footer.admin-footer {
     padding-top: 0;
 }
 
+h1.page-header {
+    padding-top: 50px;
+}
+
+.form-check-input {
+    margin-left: 0;
+}
+
+.form-group.col-md-6.form-check {
+    margin-top: 48px;
+}
+
 
 
 

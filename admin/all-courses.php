@@ -14,9 +14,9 @@
 					<!-- Row -->
 					<div class="row">
 					
-					<?php require_once("includes/sidebar-nav.php");?>
+					<?php require_once("includes/menu-navbar.php");?>
 						
-						<div class="col-lg-9 col-md-9 col-sm-12">
+					<div class="col-lg-9 col-md-9 col-sm-12">
 							
 							<!-- Row -->
 							<div class="row">
@@ -24,7 +24,7 @@
 									<nav aria-label="breadcrumb">
 										<ol class="breadcrumb">
 											<li class="breadcrumb-item"><a href="#">Home</a></li>
-											<li class="breadcrumb-item active" aria-current="page">All Courses</li>
+											<li class="breadcrumb-item active" aria-current="page">My Courses</li>
 										</ol>
 									</nav>
 								</div>
@@ -34,228 +34,72 @@
 							<!-- Row -->
 							<div class="row">
 								<div class="col-lg-12 col-md-12 col-sm-12">
-									
-									<!-- Course Style 1 For Student -->
 									<div class="dashboard_container">
 										<div class="dashboard_container_header">
 											<div class="dashboard_fl_1">
-											<h4>All Courses</h4>
-											</div>
-											<div class="dashboard_fl_2">
-												<ul class="mb0">
-													<li class="list-inline-item">
-														
-													</li>
-													<li class="list-inline-item">
-														<form class="form-inline my-2 my-lg-0">
-															<input class="form-control" type="search" placeholder="Search Courses" aria-label="Search">
-															<button class="btn my-2 my-sm-0" type="submit"><i class="ti-search"></i></button>
-														</form>
-													</li>
-												</ul>
+												<h4>All Course</h4>
 											</div>
 										</div>
 										<div class="dashboard_container_body">
-											
-											<!-- Single Course -->
-											<div class="dashboard_single_course">
-												<div class="dashboard_single_course_thumb">
-													<img src="assets/img/co-1.jpg" class="img-fluid" alt="" />
-													<div class="dashboard_action">
-														<a href="#" class="btn btn-ect">Edit</a>
-														<a href="#" class="btn btn-ect">View</a>
-													</div>
-												</div>
-												<div class="dashboard_single_course_caption">
-													<div class="dashboard_single_course_head">
-														<div class="dashboard_single_course_head_flex">
-															<span class="dashboard_instructor">Adam Wilson</span>
-															<h4 class="dashboard_course_title">Introduction Web Design with HTML</h4>
-															<div class="dashboard_rats">
-																<div class="dashboard_rating">
-																	<i class="ti-star filled"></i>
-																	<i class="ti-star filled"></i>
-																	<i class="ti-star filled"></i>
-																	<i class="ti-star filled"></i>
-																	<i class="ti-star"></i>
-																</div>
-																<span>(40 Reviews)</span>
-															</div>
-														</div>
-														<div class="dc_head_right">
-															<h4 class="dc_price_rate theme-cl">$129.00</h4>
-														</div>
-													</div>
-													<div class="dashboard_single_course_des">
-														<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
-													</div>
-													<div class="dashboard_single_course_progress">
-														<div class="dashboard_single_course_progress_1">
-															<label>82% Completed</label>
-															<div class="progress">
-																<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
-															</div>
-														</div>
-														<div class="dashboard_single_course_progress_2">
-															<ul class="m-0">
-																<li class="list-inline-item"><i class="ti-user mr-1"></i>4512 Enrolled</li>
-																<li class="list-inline-item"><i class="ti-comment-alt mr-1"></i>112 Comments</li>
-															</ul>
-														</div>
-													</div>
-												</div>
+											<div class="table-responsive">
+											<?php
+												$database    = new Database();
+												$conn        = $database->connection;
+												$data        = array('course_id','	course_title','course_original_price','is_free_course','course_overview_provider','course_tag','video_url','course_desc','outcomes','course_duration','course_sell_price','course_img','long_desc','level','is_top_course','requirement','course_features','category_id','sub_category_id');
+												$query       = $database->getData("courses",$data); ?>
+												<table class="table table-striped">
+													<thead class="thead-dark">
+														<tr>
+															<th scope="col">ID</th>
+															<th scope="col">Course Title</th>
+															<th scope="col">Course Level</th>
+															<th scope="col">Course Category</th>
+															<th scope="col">Course Image</th>
+															<th scope="col">Section & Lesson</th>
+															<th scope="col">Enroll Student</th>
+															<th scope="col">Action</th>
+															
+														</tr>
+													</thead>
+													<tbody>
+
+												<?php	
+														
+														$i = 1;
+														while($row = mysqli_fetch_array($query)){
+															$course_id           = (int) $row['course_id'];
+															$course_title        = $row['course_title'];
+															$course_instractor   = $row['level'];
+															$course_category     = $row['category_id'];
+															$course_img          = $row['course_img'];
+															
+													echo "<tr>";
+															echo "<th scope='row'>$i</th>";
+															echo "<td>$course_title</td>";
+															echo "<td>$course_instractor</td>";
+															echo "<td>$course_category</td>";
+															echo "<td><img src='../assets/img/course/$course_img' width='100px'></td>";
+															echo "<td>1</td>";
+															echo "<td>0</td>";
+															echo "<td>
+																<div class='dash_action_link'>
+																	<a href='edit-course.php?courseid=$course_id&name=course' class='view'>View</a>
+																	<a href='delete.php?courseid=$course_id&name=course' class='cancel'>Cancel</a>
+																</div>	
+															</td>";
+														echo "</tr>";
+													$i++;
+													}
+
+									   			?>
+
+
+													</tbody>
+												</table>
 											</div>
-											
-											<!-- Single Course -->
-											<div class="dashboard_single_course">
-												<div class="dashboard_single_course_thumb">
-													<img src="assets/img/co-2.jpg" class="img-fluid" alt="" />
-													<div class="dashboard_action">
-														<a href="#" class="btn btn-ect">Edit</a>
-														<a href="#" class="btn btn-ect">View</a>
-													</div>
-												</div>
-												<div class="dashboard_single_course_caption">
-													<div class="dashboard_single_course_head">
-														<div class="dashboard_single_course_head_flex">
-															<span class="dashboard_instructor">Shaurya Preet</span>
-															<h4 class="dashboard_course_title">Introduction Full About Advance PHP</h4>
-															<div class="dashboard_rats">
-																<div class="dashboard_rating">
-																	<i class="ti-star filled"></i>
-																	<i class="ti-star filled"></i>
-																	<i class="ti-star filled"></i>
-																	<i class="ti-star filled"></i>
-																	<i class="ti-star"></i>
-																</div>
-																<span>(44 Reviews)</span>
-															</div>
-														</div>
-														<div class="dc_head_right">
-															<h4 class="dc_price_rate theme-cl">$249.00</h4>
-														</div>
-													</div>
-													<div class="dashboard_single_course_des">
-														<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
-													</div>
-													<div class="dashboard_single_course_progress">
-														<div class="dashboard_single_course_progress_1">
-															<label>90% Completed</label>
-															<div class="progress">
-																<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-															</div>
-														</div>
-														<div class="dashboard_single_course_progress_2">
-															<ul class="m-0">
-																<li class="list-inline-item"><i class="ti-user mr-1"></i>5412 Enrolled</li>
-																<li class="list-inline-item"><i class="ti-comment-alt mr-1"></i>72 Comments</li>
-															</ul>
-														</div>
-													</div>
-												</div>
-											</div>
-											
-											<!-- Single Course -->
-											<div class="dashboard_single_course">
-												<div class="dashboard_single_course_thumb">
-													<img src="assets/img/co-3.jpg" class="img-fluid" alt="" />
-													<div class="dashboard_action">
-														<a href="#" class="btn btn-ect">Edit</a>
-														<a href="#" class="btn btn-ect">View</a>
-													</div>
-												</div>
-												<div class="dashboard_single_course_caption">
-													<div class="dashboard_single_course_head">
-														<div class="dashboard_single_course_head_flex">
-															<span class="dashboard_instructor">Krish Wilson</span>
-															<h4 class="dashboard_course_title">Full WordPress Development Package</h4>
-															<div class="dashboard_rats">
-																<div class="dashboard_rating">
-																	<i class="ti-star filled"></i>
-																	<i class="ti-star filled"></i>
-																	<i class="ti-star filled"></i>
-																	<i class="ti-star filled"></i>
-																	<i class="ti-star"></i>
-																</div>
-																<span>(57 Reviews)</span>
-															</div>
-														</div>
-														<div class="dc_head_right">
-															<h4 class="dc_price_rate theme-cl">$179.00</h4>
-														</div>
-													</div>
-													<div class="dashboard_single_course_des">
-														<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
-													</div>
-													<div class="dashboard_single_course_progress">
-														<div class="dashboard_single_course_progress_1">
-															<label>95% Completed</label>
-															<div class="progress">
-																<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-															</div>
-														</div>
-														<div class="dashboard_single_course_progress_2">
-															<ul class="m-0">
-																<li class="list-inline-item"><i class="ti-user mr-1"></i>6587 Enrolled</li>
-																<li class="list-inline-item"><i class="ti-comment-alt mr-1"></i>365 Comments</li>
-															</ul>
-														</div>
-													</div>
-												</div>
-											</div>
-											
-											<!-- Single Course -->
-											<div class="dashboard_single_course">
-												<div class="dashboard_single_course_thumb">
-													<img src="assets/img/co-4.jpg" class="img-fluid" alt="" />
-													<div class="dashboard_action">
-														<a href="#" class="btn btn-ect">Edit</a>
-														<a href="#" class="btn btn-ect">View</a>
-													</div>
-												</div>
-												<div class="dashboard_single_course_caption">
-													<div class="dashboard_single_course_head">
-														<div class="dashboard_single_course_head_flex">
-															<span class="dashboard_instructor">Adam Wilson</span>
-															<h4 class="dashboard_course_title">Introduction Magento Advance Code</h4>
-															<div class="dashboard_rats">
-																<div class="dashboard_rating">
-																	<i class="ti-star filled"></i>
-																	<i class="ti-star filled"></i>
-																	<i class="ti-star filled"></i>
-																	<i class="ti-star filled"></i>
-																	<i class="ti-star"></i>
-																</div>
-																<span>(30 Reviews)</span>
-															</div>
-														</div>
-														<div class="dc_head_right">
-															<h4 class="dc_price_rate theme-cl">$229.00</h4>
-														</div>
-													</div>
-													<div class="dashboard_single_course_des">
-														<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
-													</div>
-													<div class="dashboard_single_course_progress">
-														<div class="dashboard_single_course_progress_1">
-															<label>70% Completed</label>
-															<div class="progress">
-																<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-															</div>
-														</div>
-														<div class="dashboard_single_course_progress_2">
-															<ul class="m-0">
-																<li class="list-inline-item"><i class="ti-user mr-1"></i>6582 Enrolled</li>
-																<li class="list-inline-item"><i class="ti-comment-alt mr-1"></i>65 Comments</li>
-															</ul>
-														</div>
-													</div>
-												</div>
-											</div>
-											
 										</div>
+										
 									</div>
-									
 								</div>
 							</div>
 							<!-- /Row -->

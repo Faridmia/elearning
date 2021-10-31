@@ -4,7 +4,6 @@
  require_once('admin/functions.php');
 //end of file registration page.............
 function studentlogin(){
-	echo "hello tesssssssssssssssssssssssssssssssssssssss";
 
 	if($_GET['login_form'] && $_GET['login_form'] == true){
 

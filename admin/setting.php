@@ -44,7 +44,7 @@
                         <?php 
                               $database    = new Database();
                               $conn        = $database->connection;
-                              $data        = array('phone','email','facebook','twitter','linkedin','instagram','logo','address','copyright');
+                              $data        = array('phone','email','facebook','twitter','linkedin','instagram','logo','address','copyright','banner_title','banner_desc','banner_img');
                               $query       = $database->getData("setting",$data);
                               $numrows     = $database->numRows($query);
                               $row         = mysqli_fetch_array($query);
@@ -53,10 +53,18 @@
                               $facebook    = $row['facebook'];
                               $twitter     = $row['twitter'];
                               $linkedin    = $row['linkedin'];
-                              $instagram      = $row['instagram'];
-                              $address      = $row['address'];
+                              $instagram   = $row['instagram'];
+                              $address     = $row['address'];
                               $logo        = $row['logo'];
                               $copyright   = $row['copyright'];
+                              $banner_desc = $row['banner_desc'];
+                              $banner_title= $row['banner_title'];
+                              $banner_img  = $row['banner_img'];
+                             
+
+                              
+
+                              
                       ?>
 											</div>
 										</div>
@@ -107,7 +115,6 @@
                                         <input type="file" class="form-control" name='logo'/>
 
                                       </div>
-
                                     </div>
                                     <div class="form-group">
                                       <label for="address" class="col-sm-4 control-label">Address</label>
@@ -120,6 +127,24 @@
                                       <div class="col-sm-8">
                                         <input type="text" class="form-control" id="copyright" name='copyright' value="<?php echo $copyright;?>"/>
                                       </div>
+                                      <div class="form-group">
+                                      <label for="logo" class="col-sm-4 control-label">Banner Image</label>
+                                      <div class="col-sm-8">
+                                        <input type="file" class="form-control" name='banner_img'/>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="banner_title" class="col-sm-4 control-label">Banner Title</label>
+                                      <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="banner_title" name='banner_title' value="<?php echo $banner_title;?>"/>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="banner_desc" class="col-sm-4 control-label">Banner Description</label>
+                                      <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="banner_desc" name='banner_desc' value="<?php echo $banner_desc;?>"/>
+                                      </div>
+                                    </div>
                                       <div class="form-group">
                                           <div id="success"></div>
                                       </div>
@@ -134,11 +159,16 @@
                                   </div>
                               </form>
                           </div>
-                          <div class="col-lg-6 col-md-6">
+                          <div class="col-lg-3 col-md-3">
                               <h3>Logo</h3>
                               <img src="images/logo/<?php echo $logo; ?>" width='150px' height='150'>
 
-                          </div>             
+                          </div>   
+                          <div class="col-lg-3 col-md-3">
+                              <h3>Banner Image</h3>
+                              <img src="images/banner/<?php echo $banner_img; ?>" width='150px' height='150'>
+
+                          </div>           
                       </div>   
 
 											
