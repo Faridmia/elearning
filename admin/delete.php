@@ -56,7 +56,34 @@
                             <input type="submit" name="yes" value="YES" class="btn btn-danger">
                             <input type="submit" name="no" value="NO" class="btn btn-success">
                         </form>
-                    <?php 
+                    <?php
+                    } elseif ( $name == 'post' ) { ?>    
+                        <?php
+                            $postid          = (int) $_GET['postid'];
+                            $data           = array('post_id');
+                            $query          = $database->getData("blog_post", $data, 'post_id', '=', $postid);
+                            $numRows        = $database->numRows($query);  
+
+                            if( $numRows == 1 ) {
+                                if( isset($_POST['no']) && $_POST['no'] == 'NO' ) {
+                                    header('Location:blog-post.php');
+                                } elseif( isset($_POST['yes']) && $_POST['yes'] == 'YES' ) {
+                                    if( $database->deletedata('blog_post', 'post_id', $postid) ) {
+                                        echo "<div class='alert alert-success'>Successfully Deleted.</div>";
+                                        header('Refresh: 3; url=blog-post.php');
+                                    } else {
+                                        echo "<div class='alert alert-danger'>Data is not deleted.</div>";
+                                    }
+                                }
+                            } else {
+                                echo 'Not found';
+                            }
+                        ?>
+                        <form action="delete.php?postid=<?php echo $postid;?>&name=post" method="post">
+                            <input type="submit" name="yes" value="YES" class="btn btn-danger">
+                            <input type="submit" name="no" value="NO" class="btn btn-success">
+                        </form>
+                    <?php  
                     } elseif ( $name == 'student' ) { ?>    
                         <?php
                             $stuid          = (int) $_GET['stuid'];

@@ -6,7 +6,7 @@
 
 	define('DB_PASS', '');
 
-	define('DB_NAME', 'elearning');
+	define('DB_NAME', 'elearning_sys');
 
 	date_default_timezone_set('Asia/Dhaka');
 

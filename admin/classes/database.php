@@ -1,153 +1,126 @@
 <?php
 
-	//require_once 'config.php';
+// require_once 'config.php';
 
-	class database{
+class database {
 
-		public $connection;
+    public $connection;
 
-		public function __construct(){
-			$this->connection();
-		}
-		public function connection(){
-			$this->connection = mysqli_connect(DB_HOST,DB_USER,DB_PASS,DB_NAME);
-			if(!$this->connection){
-				echo "database is not connected".mysql_error($this->connection);
-			}
-			
-			
-		}
-		// .......................data retrive korar jonno..........
+    public function __construct() {
+        $this->connection();
+    }
+    public function connection() {
+        $this->connection = mysqli_connect( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+        if ( !$this->connection ) {
+            echo "database is not connected" . mysql_error( $this->connection );
+        }
 
-		public function getData($table,$whichcolumn = array(),$columnname = null,$compare = null,$columnvalue = null){
-			if(is_array($whichcolumn)){
-				$whichcolumn = implode(",",$whichcolumn);
-			}
-			
-			if(empty($columnname) && empty($columnvalue)){
-				$query = "SELECT $whichcolumn FROM $table";
-			}
-			elseif (!empty($columnname) && !empty($columnvalue)) {
-				$sql ="SELECT $whichcolumn FROM $table WHERE $columnname $compare $columnvalue";
-				$query = $sql;
-				
-			}
+    }
+    // .......................data retrive korar jonno..........
 
-			$query = mysqli_query($this->connection,$query);
-			
-			if($query)
-				return $query;
-			
-			else
-			
-				return false;
-			
-		}
-		// ........................data update korar jonno...........
-		public function updatedata( $table, $whichColumn = array(), $columnName = null, $compare = null , $columnValue = null ) {
+    public function getData( $table, $whichcolumn = array(), $columnname = null, $compare = null, $columnvalue = null ) {
+        if ( is_array( $whichcolumn ) ) {
+            $whichcolumn = implode( ",", $whichcolumn );
+        }
 
-		$finalData = array();
-		foreach ($whichColumn as $name => $value) {
-			$finalData[] = "$name = '$value' ";
-		}
+        if ( empty( $columnname ) && empty( $columnvalue ) ) {
+            $query = "SELECT $whichcolumn FROM $table";
+        } elseif ( !empty( $columnname ) && !empty( $columnvalue ) ) {
+            $sql   = "SELECT $whichcolumn FROM $table WHERE $columnname $compare $columnvalue";
+            $query = $sql;
 
-		$finalData = implode(',', $finalData);
-		
-		$sql = "UPDATE $table SET $finalData WHERE $columnName $compare $columnValue ";
+        }
 
-		$query = mysqli_query($this->connection, $sql);
+        $query = mysqli_query( $this->connection, $query );
 
-		if($query)
-			return $query;
-		else 	
-			return false;
+        if ( $query ) {
+            return $query;
+        } else {
+            return false;
+        }
 
-	}
+    }
+    // ........................data update korar jonno...........
+    public function updatedata( $table, $whichColumn = array(), $columnName = null, $compare = null, $columnValue = null ) {
 
-	/*................................data delete korar query..............*/
-		public function deletedata( $table,$columnName , $columnValue) {
+        $finalData = array();
+        foreach ( $whichColumn as $name => $value ) {
+            $finalData[] = "$name = '$value' ";
+        }
 
-		
-		$sql = "DELETE FROM $table  WHERE $columnName = $columnValue";
+        $finalData = implode( ',', $finalData );
 
-		$query = mysqli_query($this->connection, $sql);
+        $sql = "UPDATE $table SET $finalData WHERE $columnName $compare $columnValue ";
 
-		if($query)
-			return $query;
-		else 	
-			return false;
+        $query = mysqli_query( $this->connection, $sql );
 
-	}
-		//.....................data insert korar jonno...........
-		public function insertdata( $table, $whichColumn = array()) {
+        if ( $query ) {
+            return $query;
+        } else {
+            return false;
+        }
 
-		$columnname = array();
-		$columnvalue = array();
-		foreach ($whichColumn as $name => $value) {
-			$columnvalue[] = "'$value'";
-			$columnname[] = $name;
-		}
+    }
 
-		$columnname = implode(',', $columnname);
-		$columnvalue = implode(',', $columnvalue);
-		
-		$sql = "INSERT INTO $table($columnname)VALUES($columnvalue)";
+    /*................................data delete korar query..............*/
+    public function deletedata( $table, $columnName, $columnValue ) {
 
-		$query = mysqli_query($this->connection, $sql);
+        $sql = "DELETE FROM $table  WHERE $columnName = $columnValue";
 
-		if($query)
-			return $query;
-		else 	
-			return false;
+        $query = mysqli_query( $this->connection, $sql );
 
-	}
+        if ( $query ) {
+            return $query;
+        } else {
+            return false;
+        }
 
-	/*............................join query function.............*/
+    }
+    //.....................data insert korar jonno...........
+    public function insertdata( $table, $whichColumn = array() ) {
 
-	// public function joinquery($table1,$table2,$table3,$whichcolumn = array(),$join,$subid,$sub_catid,$mainid){
+        $columnname  = array();
+        $columnvalue = array();
+        foreach ( $whichColumn as $name => $value ) {
+            $columnvalue[] = "'$value'";
+            $columnname[]  = $name;
+        }
 
-	// 	$finaldata = array();
-	// 	foreach($whichcolumn as $name => $value){
-	// 		$finaldata[]= "$value";
-	// 	}
+        $columnname  = implode( ',', $columnname );
+        $columnvalue = implode( ',', $columnvalue );
 
-	// 	$columnname = implode(",", $finaldata);
-	
-	// 	$sql = "SELECT $columnname FROM $table1 $join $table2 ON $table1.$subid = $table2.$subid $join $table3 ON $table1.$sub_catid = $table3.$sub_catid ORDER BY $table1.$mainid DESC";
+        $sql = "INSERT INTO $table($columnname)VALUES($columnvalue)";
 
+        $query = mysqli_query( $this->connection, $sql );
 
-	// 	$query = mysqli_query($this->connection, $sql);
+        if ( $query ) {
+            return $query;
+        } else {
+            return false;
+        }
 
-	// 	if($query)
-	// 		return $query;
-	// 	else 	
-	// 		return false;
+    }
 
+    public function numRows( $query ) {
+        return mysqli_num_rows( $query );
+    }
 
+    public static function generatetoken() {
+        $value = uniqid();
+        return $value;
+    }
 
-	// }
+    public function formtoken() {
+        $value = self::generatetoken();
 
-		public function numRows($query){
-			return mysqli_num_rows($query);
-		}
+        $_SESSION['token'] = $value;
 
-		public static function generatetoken(){
-			$value = uniqid();
-			return $value;
-		}
+        return "<input type='hidden' name='token' value='$value'/>";
+        unset( $_SESSION['token'] );
+    }
+    public function token( $token ) {
+        return $_POST['token'] == $_SESSION['token'] ? true : false;
 
-		public function formtoken(){
-			$value = self::generatetoken();
-			
-			$_SESSION['token'] = $value;
-
-
-			return "<input type='hidden' name='token' value='$value'/>";
-			unset($_SESSION['token']);
-		}
-		public function token($token){
-			return $_POST['token'] == $_SESSION['token'] ? true : false;
-
-		}
-	}
+    }
+}
 ?>

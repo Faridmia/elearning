@@ -107,14 +107,16 @@
             $('.filter_data').html('<div id="loading" style=""></div>');
 
             var action = 'fetch_data';
-            var category = get_filter('category');
+            var category   = get_filter('category');
+            var instructor = get_filter('instructor');
 
             $.ajax({
                 url:"fetch_data.php",
                 method:"POST",
                 data:{
                     action:action,
-                    category:category
+                    category:category,
+                    instructor:instructor
                 },
                 success:function(data){
                     $('.filter_data').html(data);

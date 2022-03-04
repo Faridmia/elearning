@@ -42,7 +42,6 @@
 			if(!empty(isset($_FILES['user_profile_photo']['name']) && !empty($_FILES['user_profile_photo']['name']))) {
 				move_uploaded_file($tmp_name, '../assets/img/profile/'.$newFile);
 			} ?>
-			 ?>
 				<script>
 					setTimeout(function(){
 						window.location = "all-students.php";
@@ -58,4 +57,3 @@
 		}			
 	}
 	
-?>

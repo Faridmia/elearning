@@ -5,15 +5,11 @@
         <div id="main-wrapper">
 		
 		<?php require_once('includes/top-nav.php');  ?>
-
-			
 			<!-- ============================ Dashboard: My Order Start ================================== -->
 			<section class="gray pt-0">
 				<div class="container-fluid">
-					
 					<!-- Row -->
 					<div class="row">
-					
 					<?php require_once("includes/menu-navbar.php");?>
 						
 					<div class="col-lg-9 col-md-9 col-sm-12">
@@ -37,7 +33,7 @@
 									<div class="dashboard_container">
 										<div class="dashboard_container_header">
 											<div class="dashboard_fl_1">
-												<h4>All Course</h4>
+												<h4>All Enroll List</h4>
 											</div>
 										</div>
 										<div class="dashboard_container_body">
@@ -63,15 +59,22 @@
 												<?php	
 														$i = 1;
 														while($row = mysqli_fetch_array($query)){
-															$users_id          	= (int) $row['users_id'];
+															$users_id     = (int) $row['users_id'];
+															$enroll_sql = "SELECT * FROM enroll WHERE user_id = {$users_id}";
+
+															$enroll_query = mysqli_query($conn, $enroll_sql);
+															$fetch_enroll = mysqli_fetch_array($enroll_query);
+															$total_enroll = $database->numRows($enroll_query);
+
 															$name        		= $row['name'];
 															$email       		= $row['email'];
 															$user_profile_photo = $row['user_profile_photo'];
+
 														echo "<tr>";
 															echo "<td><img src='../assets/img/profile/$user_profile_photo' width='60px'></td>";
 															echo "<td>$name</td>";
 															echo "<td>$email</td>";
-															echo "<td>1</td>";
+															echo "<td>$total_enroll</td>";
 															echo "<td>
 																<div class='dash_action_link'>
 																	<a href='edit-student.php?stuid=$users_id&name=student' class='view'>View</a>

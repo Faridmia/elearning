@@ -1,8 +1,6 @@
 $(document).ready(function(){
     // ajax call from already exists email verifications
 
-
-
     $("#stuemail").on("keypress blur",function(){
 
         var stuemail = $("#stuemail").val();
@@ -18,25 +16,21 @@ $(document).ready(function(){
 
             },
             success: function(result){
-              // console.log(result);
 
-               if( result != 0){
+                if( result != 0){
                     $("#statusMsg2").html("<span style='color:red;'>Email already exist!</span>");
                    $("#signupbtn").attr("disabled",true);
-               }
-               if(result == 0 && reg.test(stuemail)){
-                $("#statusMsg2").html("<span style='color:green;'>Available</span>");
-                $("#signupbtn").attr("disabled",false);
                 }
-               if(!reg.test(stuemail)){
+                if(result == 0 && reg.test(stuemail)){
+                    $("#statusMsg2").html("<span style='color:green;'>Available</span>");
+                    $("#signupbtn").attr("disabled",false);
+                }
+                if(!reg.test(stuemail)){
                     $("#statusMsg2").html("<span style='color:red;'>Please Enter Valid  Email</span>");
                     $("#signupbtn").attr("disabled",true);
-                }
-               
+                } 
             },
-
         });
-
     });
 
 });
@@ -79,7 +73,7 @@ $('#signupbtn').click(function(event){
             $("#statusMsg4").html("<span style='color:red;'>Please Enter Your Password</span>");
             $("#stupass").focus();
             return false;
-        }else{
+        } else {
 
             jQuery.ajax({
 
@@ -103,11 +97,8 @@ $('#signupbtn').click(function(event){
                         $("#successMsg").html("<span class='alert alert-danger'>Unable to Register !</span>");
                     }
                 },
-    
             });
-
         }
-    
 });
 // empty all field
 
@@ -127,7 +118,6 @@ function clearStuRegField(){
     $('#login_button').click(function(event){
 
             event.preventDefault();
-
             var user_email     = $("#user_email").val();
             var user_pass    = $("#user_pass").val();
 
@@ -142,6 +132,38 @@ function clearStuRegField(){
 
                 },
                 success: function(result){
+                    if( result == 0){
+                        $("#statusLogMsg").html("<div class='alert alert-danger'>Invalid Email ID OR Password!</div>");
+                        clearStuRegField();
+                    } else if( 1 == result){
+                        $("#statusLogMsg").html("<div class='spinner-border text-success' role='status'></div>");
+
+                        setTimeout(() => {
+                            window.location.href = "index.php";
+                        },3000);
+                    }
+                },
+            });
+    });
+
+    // check student login verifications
+    $('#enroll_login_button').click(function(event){
+
+        event.preventDefault();
+        var user_email   = $("#enroll_user_email").val();
+        var user_pass    = $("#enroll_user_pass").val();
+
+        jQuery.ajax({
+
+            url:'student/addStudent.php',
+            method:'POST',
+            data: {
+                checkLogemail:"checkLogemail_enroll",
+                user_email: user_email,
+                user_pass: user_pass,
+
+            },
+            success: function(result){
                 console.log(result);
                 if( result == 0){
                     $("#statusLogMsg").html("<div class='alert alert-danger'>Invalid Email ID OR Password!</div>");
@@ -150,13 +172,57 @@ function clearStuRegField(){
                     $("#statusLogMsg").html("<div class='spinner-border text-success' role='status'></div>");
 
                     setTimeout(() => {
-                        window.location.href = "index.php";
+                        // window.location.href = "detail.php";
+                        location.reload(true);
                     },3000);
                 }
-                
-                
-                },
-
-            });
+            },
+        });
     });
+
+
+    // $(document).ready(function(){
+
+    //     $('.play-icon').click(function () {
+    //         var video = '<iframe allowfullscreen src="' + $(this).attr('data-video') + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+    //         $(this).replaceWith(video);
+    //     });
+    
+    //     // $('.play-icon').mousemove(function (e) {
+    //     //     var parentOffset = $(this).offset();
+    //     //     var relX = e.pageX - parentOffset.left;
+    //     //     var relY = e.pageY - parentOffset.top;
+    //     //     $(".play-button").css({ left: relX, top: relY});
+    //     // });
+    //     // $('.play-icon').mouseout(function() {
+    //     //     $(".play-button").css({ left: '50%', top: '50%'});
+    //     // });
+
+    // });
+
+    
+    // complete task ajax
+    $('#course_lesson').submit(function(e){
+        e.preventDefault();
+        var data = new FormData(this);
+        $.ajax({
+            type: 'POST',
+            url: 'course-video-play.php',
+            data: data,
+            dataType: 'html',
+            contentType: false,
+            cache: false,
+            processData: false,
+
+            beforesend : function(){
+                $('#success').html('loading.....');
+            },
+            success : function(result){
+                $('#success').html(result);
+            }
+
+        });
+    });
+
+
 

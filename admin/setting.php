@@ -44,7 +44,7 @@
                         <?php 
                               $database    = new Database();
                               $conn        = $database->connection;
-                              $data        = array('phone','email','facebook','twitter','linkedin','instagram','logo','address','copyright','banner_title','banner_desc','banner_img');
+                              $data        = array('phone','email','facebook','twitter','linkedin','instagram','logo','address','copyright','banner_title','banner_desc','banner_img','newsletter_heading','newsletter_content');
                               $query       = $database->getData("setting",$data);
                               $numrows     = $database->numRows($query);
                               $row         = mysqli_fetch_array($query);
@@ -60,10 +60,8 @@
                               $banner_desc = $row['banner_desc'];
                               $banner_title= $row['banner_title'];
                               $banner_img  = $row['banner_img'];
-                             
-
-                              
-
+                              $new_heaing  = $row['newsletter_heading'];
+                              $news_con    = $row['newsletter_content'];
                               
                       ?>
 											</div>
@@ -145,6 +143,18 @@
                                         <input type="text" class="form-control" id="banner_desc" name='banner_desc' value="<?php echo $banner_desc;?>"/>
                                       </div>
                                     </div>
+                                    <div class="form-group">
+                                      <label for="news_heading" class="col-sm-4 control-label">Newsleter Heading</label>
+                                      <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="news_heading" name='news_heading' value="<?php echo $new_heaing;?>"/>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="news_con" class="col-sm-4 control-label">Newsleter Content</label>
+                                      <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="news_con" name='news_con' value="<?php echo $news_con;?>"/>
+                                      </div>
+                                    </div>
                                       <div class="form-group">
                                           <div id="success"></div>
                                       </div>
@@ -154,7 +164,7 @@
                                         <div class="col-sm-offset-2 col-sm-10">
                                           <input type="hidden" name="page" value="setting"/>
                                           <?php echo $database->formtoken();?>
-                                              <button type="submit" name="submit" value='submit' class="btn btn-primary btn-lg">update profile <span class="glyphicon glyphicon-ok-sign"></span></button>
+                                              <button type="submit" name="submit" value='submit' class="btn btn-theme">update profile <span class="glyphicon glyphicon-ok-sign"></span></button>
                                       </div>
                                   </div>
                               </form>
@@ -222,7 +232,6 @@
                     success : function(result){
                         $('#success').html(result);
                     }
-
 
                 });
             });

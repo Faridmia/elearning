@@ -87,6 +87,7 @@
 												echo "<div class='alert alert-success'>";
 												echo 'Successfully Logged';
 												$_SESSION['username'] = $user;   
+												$_SESSION['unique_user_id'] = uniqid();   
 												header("Refresh:3; url=index.php");
 												exit();            
 												echo '</div>';

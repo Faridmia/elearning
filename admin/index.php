@@ -32,27 +32,67 @@
                 
                 <!-- Row -->
                 <div class="row">
+                    <?php 
+                        $database = new Database();
+                        $conn = $database->connection;
+
+                        $active_sql = "SELECT * FROM courses WHERE is_active = '1'";
+                        $act_query = mysqli_query($conn,$active_sql);
+                        $fetch = mysqli_fetch_array($act_query);
+                        $active_course = $database->numRows($act_query);
+
+                        $pending_sql = "SELECT * FROM courses WHERE is_active = '0'";
+                        $pending_query = mysqli_query($conn,$pending_sql);
+                        $pen_course = $database->numRows($pending_query);
+
+
+                        $sql = "SELECT * FROM courses";
+                        $query = mysqli_query($conn,$sql);
+                        $total_course = $database->numRows($query);
+
+                        $user_sql = "SELECT * FROM users WHERE role_id = '2'";
+                        $user_query = mysqli_query($conn,$user_sql);
+                        $total_student = $database->numRows($user_query);
+
+                        if(isset($_GET['name']) == 'active_course'){
+                            $data = [
+                                'is_active' => 1,
+                                'status' => 1
+                            ];
+                            $query = $database->updatedata('courses',$data,'is_active', '=', 0);
+
+                        }
+
+                        // echo "<pre>";
+                        // print_r($total_course);
+                        // echo "</pre>";
+                    ?>
             
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="dashboard_stats_wrap widget-1">
+                            <div class="dashboard_stats_wrap_content"><h4><?php echo $total_course;?></h4> <span>Number Of Course</span></div>
+                            <div class="dashboard_stats_wrap-icon"><i class="dripicons-archive text-muted"></i></div>
+                        </div>	
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="dashboard_stats_wrap widget-2">
+                            <div class="dashboard_stats_wrap_content"><h4><?php echo $total_student;?></h4> <span>Number of Students</span></div>
+                            <div class="dashboard_stats_wrap-icon"><i class="dripicons-user-group text-muted"></i></div>
+                        </div>	
+                    </div>
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="dashboard_stats_wrap widget-1">
-                            <div class="dashboard_stats_wrap_content"><h4>607</h4> <span>Listings Included</span></div>
-                            <div class="dashboard_stats_wrap-icon"><i class="ti-location-pin"></i></div>
+                            <div class="dashboard_stats_wrap_content"><h4><?php echo $active_course;?></h4> <span>Active Course</span></div>
+                            <div class="dashboard_stats_wrap-icon"><i class="dripicons-user-group text-muted"></i></div>
                         </div>	
                     </div>
-                    
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="dashboard_stats_wrap widget-2">
-                            <div class="dashboard_stats_wrap_content"><h4>102</h4> <span>Listings Remaining</span></div>
-                            <div class="dashboard_stats_wrap-icon"><i class="ti-pie-chart"></i></div>
-                        </div>	
-                    </div>
-                    
-                    <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="col-lg-4 col-md-6 col-sm-12"><a href="index.php?name=active_course">
                         <div class="dashboard_stats_wrap widget-4">
-                            <div class="dashboard_stats_wrap_content"><h4>70</h4> <span>Featured Included</span></div>
-                            <div class="dashboard_stats_wrap-icon"><i class="ti-user"></i></div>
-                        </div>	
+                            <div class="dashboard_stats_wrap_content"><h4><?php echo $pen_course;?></h4> <span>Pending Course</span></div>
+                            <div class="dashboard_stats_wrap-icon"><i class="dripicons-user-group text-muted"></i></div>
+                        </div></a>
                     </div>
+                    
 
                 </div>
                 <!-- /Row -->

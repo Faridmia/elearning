@@ -9326,4 +9326,41 @@ footer.skin-dark-footer .footer-widget ul li a, footer.skin-dark-footer, footer.
     margin-top: 20px;
 }
 
+ul.lectures_lists li {
+    padding: 17px 15px;
+    background: #f1f4fb;
+    color: #24394e;
+    border-bottom: 1px solid #e5e8ef;
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.main-video .title{
+    background-color: #002758;
+    border:1px solid #002758;
+    color:white!important;
+}
+
+.main-video .title span a{
+    color:white!important;
+    float: right;
+    border: 1px solid white;
+    /* padding: 15px; */
+    padding: 5px 10px;
+    margin-bottom: 5px;
+}
+
+.flex-cire-button{
+    display: flex;
+    flex-wrap: wrap;
+    place-content: space-between;
+
+}
+
 
